@@ -7,6 +7,7 @@ import app.greatreadsfinal.services.WishReadListService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,23 +21,27 @@ public class WishReadListController {
     public WishReadListController(WishReadListService service){
         this.service = service;
     }
-    @PostMapping("/addBook") //TODO only THE USER HIMSELF can do this
+    @PostMapping("/addBook")
+    @PreAuthorize("#wishDto.userId == authentication.principal.userId")
     public ResponseEntity<String> saveBook(@Valid @RequestBody WishReadListDto wishDto) {
         service.saveWishReadList(wishDto);
         return ResponseEntity.ok("Book added to wish list.");
     }
-    @PostMapping("/updateStatus") //TODO only THE USER HIMSELF can do this
+    @PostMapping("/updateStatus")
+    @PreAuthorize("#userId == authentication.principal.userId")
     public ResponseEntity<String> updateStatus(@Valid @RequestParam Wish wish, @RequestParam Long userId,
                                                @RequestParam Long bookId){
         service.updateStatus(wish,userId,bookId);
         return ResponseEntity.ok("Status updated.");
     }
-    @DeleteMapping("/{userId}/{bookId}")  //TODO only THE USER HIMSELF can do this
+    @DeleteMapping("/{userId}/{bookId}")
+    @PreAuthorize("#userId == authentication.principal.userId")
     public ResponseEntity<?> deleteWishReadList(@PathVariable Long userId, @PathVariable Long bookId) {
         service.deleteWishReadList(userId, bookId);
         return ResponseEntity.ok().build();
     }
-    @DeleteMapping("/user/{userId}/all")  //TODO only THE USER HIMSELF can do this
+    @DeleteMapping("/user/{userId}/all")
+    @PreAuthorize("#userId == authentication.principal.userId")
     public ResponseEntity<?> deleteAllWishReadListsByUserId(@PathVariable Long userId) {
         service.deleteAllWishReadListsByUserId(userId);
         return ResponseEntity.noContent().build();
@@ -47,7 +52,8 @@ public class WishReadListController {
         return ResponseEntity.ok(wishReadLists);
     }
 
-    @GetMapping("/user/{userId}/status")  //TODO only THE USER HIMSELF can do this
+    @GetMapping("/user/{userId}/status")
+    @PreAuthorize("#userId == authentication.principal.userId")
     public ResponseEntity<List<WishReadList>> getWishReadListsByUserIdAndWish(
             @PathVariable Long userId,
             @RequestParam Wish wish) {

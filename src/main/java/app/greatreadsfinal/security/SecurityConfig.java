@@ -70,6 +70,11 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("user/create").permitAll()
                         .requestMatchers("user/login").permitAll()
+                        .requestMatchers("author/add").permitAll()
+                        .requestMatchers("author/byCountry/{country}").permitAll()
+                        .requestMatchers("author/all").permitAll()
+                        .requestMatchers("author/byId/{authorId}").permitAll()
+                        .requestMatchers("author/byBook/{bookId}").permitAll()
                         .requestMatchers("/**").authenticated()
                 )
 

@@ -26,6 +26,7 @@ public class JWTService {
     }
 
     public boolean validateJwtToken(String authToken) {
+        System.out.println("entered validateJwtToken from JWTService");
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;
@@ -36,8 +37,9 @@ public class JWTService {
     }
 
     public String generateTokenForUser(UserD user) {
+        System.out.println("entered generateTokenForUser from JWTService");
         return Jwts.builder()
-                .setSubject(user.getUsername()) //todo added username
+                .setSubject(user.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
@@ -46,7 +48,7 @@ public class JWTService {
 
 
     public String getEmailFromToken(String token) {
-
+        System.out.println("Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject()  "+ Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject()) ;
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 }

@@ -33,7 +33,7 @@ public class UserController {
     }
     @PostMapping("/logout") //TODO ONLY THE USER HIMSELF CAN LOGOUT.
     public ResponseEntity<String> logoutUser() {
-        userService.logoutUser();
+
         return ResponseEntity.ok("Logout successful");
     }
     @PatchMapping("update/{userId}")

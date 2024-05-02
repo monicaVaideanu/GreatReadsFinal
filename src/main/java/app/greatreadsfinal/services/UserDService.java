@@ -125,7 +125,4 @@ public class UserDService {
         user.setRole(Role.AUTHOR);
         userDetailsRepository.save(user);
     }
-
-    public void logoutUser() { //TODO add this
-    }
 }

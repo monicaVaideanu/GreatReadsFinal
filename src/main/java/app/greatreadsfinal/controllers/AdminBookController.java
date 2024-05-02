@@ -16,15 +16,16 @@ public class AdminBookController {
     @Autowired
     private BookManagementService bookManagementService;
     @PostMapping("/accept/{bookId}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> acceptBook(@PathVariable Long bookId) {
         bookManagementService.acceptBook(bookId);
         return ResponseEntity.ok("Book accepted");
     }
 
     @PostMapping("/reject/{bookId}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> rejectBook(@PathVariable Long bookId) {
+        System.out.println("entered reject book from controller");
         bookManagementService.rejectBook(bookId);
         return ResponseEntity.ok("Book rejected");
     }

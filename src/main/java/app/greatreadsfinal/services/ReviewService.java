@@ -49,4 +49,17 @@ public class ReviewService {
                 .average()
                 .orElse(0.0);
     }
+
+    @Transactional
+    public void deleteReview(Long userId, Long bookId) {
+        ReviewComposedId reviewId = new ReviewComposedId(userId, bookId);
+        if (!reviewRepo.existsById(reviewId)) {
+            throw new IllegalArgumentException("Review not found for user ID " + userId + " and book ID " + bookId);
+        }
+        try {
+            reviewRepo.deleteById(reviewId);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete the review due to an error: " + e.getMessage(), e);
+        }
+    }
 }

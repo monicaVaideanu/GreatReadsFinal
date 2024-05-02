@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +30,8 @@ public class BookController {
     private ReviewService reviewService;
     private TextModeratorService textModerationService;
 
-    @PostMapping(value = "/create", consumes = "multipart/form-data") //TODO ONLY THE AUTHOR OR ADMIN CAN DO THIS
+    @PostMapping(value = "/create", consumes = "multipart/form-data")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('AUTHOR')")
     public ResponseEntity<String> createBook(
             @RequestPart("bookDto") BooksDto bookDto,
             @RequestPart(required = false) MultipartFile file
@@ -45,13 +47,15 @@ public class BookController {
         }
     }
 
-    @PatchMapping("/update/{bookId}") //TODO only an admin OR THE AUTHOR HIMSELF can DO this/
+    @PatchMapping("/update/{bookId}")
+    @PreAuthorize("hasRole('ADMIN') or @bookSecurityService.isBookAuthor(#bookId, authentication.name)")
     public ResponseEntity<String> updateBook(@PathVariable Long bookId, @RequestBody BooksDto bookDto) {
         bookManagementService.updateBook(bookId, bookDto);
         return ResponseEntity.ok("Book updated successfully");
     }
 
-    @DeleteMapping("/delete/{bookId}")//TODO only admin OR THE AUTHOR HIMSELF can delete
+    @DeleteMapping("/delete/{bookId}")
+    @PreAuthorize("hasRole('ADMIN') or @bookSecurityService.isBookAuthor(#bookId, authentication.name)")
     public ResponseEntity<String> deleteBook(@PathVariable Long bookId) {
         bookService.deleteBook(bookId);
         return ResponseEntity.ok("Book deleted successfully");
@@ -99,11 +103,13 @@ public class BookController {
         return ResponseEntity.ok(book);
     }
 
-    @PostMapping("/{bookId}/addReview/{userId}") //TODO ONLY AN USER OR AN ADMIN CAN DO THIS
+    @PostMapping("/{bookId}/addReview/{userId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('READER') or !@bookSecurityService.isBookAuthor(#bookId, authentication.name) ")
     public ResponseEntity<String> addReviewToBook(@PathVariable Long bookId, @PathVariable Long userId,
                                                   @RequestBody @Valid ReviewDto reviewDto, BindingResult result) {
         if (result.hasErrors()) {
-            return ResponseEntity.badRequest().body("Validation error: " + result.getFieldError().getDefaultMessage());
+            return ResponseEntity.badRequest()
+                    .body("Validation error: " + result.getFieldError().getDefaultMessage());
         }
 
         if (reviewDto.getReviewText() != null && !textModerationService.isTextAppropriate(reviewDto.getReviewText())) {
@@ -118,7 +124,18 @@ public class BookController {
     public ResponseEntity<List<Books>> getTopTen() {
         return ResponseEntity.ok(bookManagementService.getTop10RatedBooks());
     }
-    //TODO ADD METHOD TO DELETE REVIEW BY THE USER WHO ADD IT AND ADMIN => ADMIN CAN DELETE ANY REVIEW (AUTHORIZATION)
+    @DeleteMapping("/review/{userId}/{bookId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> deleteReview(@PathVariable Long userId, @PathVariable Long bookId) {
+        try {
+            reviewService.deleteReview(userId, bookId);
+            return ResponseEntity.ok("Review deleted successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
     //TODO DOWNLOAD BOOK ON PC?
     @GetMapping("/download/{bookId}")

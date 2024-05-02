@@ -200,7 +200,6 @@ public class BookManagementService {
     }
 
     public void rejectBook(Long bookId) {
-        System.out.println("entered reject book from service");
         Books book = bookRepo.findById(bookId).orElseThrow(() -> new DoesNotExistException("Book not found"));
         book.setStatus(BookStatus.REJECTED);
         bookRepo.save(book);

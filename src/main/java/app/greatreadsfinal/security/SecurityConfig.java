@@ -24,8 +24,6 @@ import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import static org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter.Directive.COOKIES;
-
-//TODO REVISIT https://www.baeldung.com/spring-security-migrate-5-to-6
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity

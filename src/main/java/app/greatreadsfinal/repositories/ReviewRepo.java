@@ -12,5 +12,4 @@ import java.util.List;
 public interface ReviewRepo extends JpaRepository<Review, ReviewComposedId> {
     List<Review> findByReviewIdBookId(Long bookId);
 
-    JsonPath findByUserId(Long userId);
 }

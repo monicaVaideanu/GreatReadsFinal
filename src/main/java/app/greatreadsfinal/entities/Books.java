@@ -59,7 +59,7 @@ public class Books {
 
     private String filePath;
 
-    @Column
+    @Column //TODO ADMIN ID WHEN A BOOK IS APPROVED
     private Long adminId;
 
     @Nullable
@@ -67,6 +67,6 @@ public class Books {
     @JoinColumn(name = "collection_id")
     private Collection collection;
 
-    @ManyToMany(mappedBy = "publishedBooks", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "publishedBooks", fetch = FetchType.EAGER, cascade = CascadeType.ALL) //TODO MANY AUTHORS, NEED TO INSERT IN DIFFERENT TABLE
     private Set<Author> authors;
 }

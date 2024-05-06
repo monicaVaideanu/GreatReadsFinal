@@ -27,7 +27,6 @@ public class UserController {
     }
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody @Valid LoginDTO loginDTO) throws AuthenticationFailedException {
-        System.out.println("LOGIN DTO: " + loginDTO);
         String jwt = userService.loginUser(loginDTO);
         return ResponseEntity.ok(jwt);
     }

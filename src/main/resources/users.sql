@@ -1,4 +1,4 @@
-INSERT IGNORE INTO user_details(created_at, updated_at, user_id, email, first_name, last_name, middle_name, password, role,
+INSERT INTO user_details(created_at, updated_at, user_id, email, first_name, last_name, middle_name, password, role,
                          username)
 VALUES ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 1, 'AAAAA@gmail.com', 'Popescu',
         'Georgel', 'Gigi', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'ADMIN', 'userAdmin'),
@@ -24,7 +24,7 @@ VALUES ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 1, 'AAAAA@gm
         'Gigi', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'AUTHOR', 'authorAuthor')
 ;
 -- AUTORI CLASICI
-INSERT IGNORE INTO authors (author_id, first_name, last_name, description, country, middle_name, created_at, updated_at)
+INSERT INTO authors (author_id, first_name, last_name, description, country, middle_name, created_at, updated_at)
 VALUES
     (1, 'George', 'Orwell', 'Was a novelist, poet, essayist, journalist, and critic. His work is characterised by lucid prose, social criticism, opposition to totalitarianism, and support of democratic socialism.', 'United Kingdom', ' ', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
     (2, 'Fyodor', 'Dostoevsky', 'Was a novelist, short story writer, essayist and journalist. Numerous literary critics regard him as one of the greatest novelists in all of world literature, as many of his works are considered highly influential masterpieces.', 'Russia', 'Mikhailovich', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
@@ -35,7 +35,7 @@ VALUES
     (7, 'Agatha', 'Christie', 'Was a writer known for her 66 detective novels and 14 short story collections, particularly those revolving around fictional detectives Hercule Poirot and Miss Marple. She also wrote the world''s longest-running play, the murder mystery The Mousetrap, which has been performed in the West End of London since 1952', 'United Kingdom', 'Christie', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463');
 
 -- AUTORI USERI
-INSERT  INTO authors(author_id, description, country, middle_Name, user_id, created_at, updated_at,first_name, last_name)
+INSERT INTO authors(author_id, description, country, middle_Name, user_id, created_at, updated_at,first_name, last_name)
 VALUES (8, 'Lack of talent in description, my books speak for me', 'Portugal', 'Siri', 11, '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 'Hoffman', 'Joseph');
 
 INSERT INTO collections(collection_id, name)
@@ -112,7 +112,7 @@ VALUES (3, 1),
        (7, 2),
        (7, 3);
 
-INSERT INTO reviews(user_id, book_id, rating, reviewText, published_date)
+INSERT INTO reviews(user_id, book_id, rating, review_text, published_date)
 VALUES (1, 1, 5, 'This is a great book',    '2024-04-14 11:26:40.434463'),
        (1, 2, 3.9, 'This is a good book',  '2024-04-14 11:26:40.434463'),
        (1, 3, 4.2, 'This is a great book', '2024-04-14 11:26:40.434463'),

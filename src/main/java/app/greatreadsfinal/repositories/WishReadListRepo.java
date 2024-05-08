@@ -1,9 +1,11 @@
 package app.greatreadsfinal.repositories;
 
+import app.greatreadsfinal.dtos.WishListDtoForTable;
 import app.greatreadsfinal.entities.WishReadList;
 import app.greatreadsfinal.entities.composedId.ComposedId;
 import app.greatreadsfinal.entities.enums.Wish;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

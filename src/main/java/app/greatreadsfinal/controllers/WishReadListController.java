@@ -8,6 +8,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,49 +17,42 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/books/list")
+@CrossOrigin(origins = "http://localhost:3000")
 public class WishReadListController {
     WishReadListService service;
     @Autowired
     public WishReadListController(WishReadListService service){
         this.service = service;
     }
-    @PostMapping("/addBook")
-    @PreAuthorize("#wishDto.userId == authentication.principal.userId")
+    @PostMapping("/addBook") //TODO IN FE
+    @PreAuthorize("@authenticateUserService.hasId(#userId)")
     public ResponseEntity<String> saveBook(@Valid @RequestBody WishReadListDto wishDto) {
         service.saveWishReadList(wishDto);
         return ResponseEntity.ok("Book added to wish list.");
     }
-    @PostMapping("/updateStatus")
-    @PreAuthorize("#userId == authentication.principal.userId")
+    @PostMapping("/updateStatus") //WORKS
+    @PreAuthorize("@authenticateUserService.hasId(#userId)")
     public ResponseEntity<String> updateStatus(@Valid @RequestParam Wish wish, @RequestParam Long userId,
                                                @RequestParam Long bookId){
         service.updateStatus(wish,userId,bookId);
         return ResponseEntity.ok("Status updated.");
     }
-    @DeleteMapping("/{userId}/{bookId}")
-    @PreAuthorize("#userId == authentication.principal.userId")
+    @DeleteMapping("delete/{userId}/{bookId}") //WORKS
+    @PreAuthorize("@authenticateUserService.hasId(#userId)")
     public ResponseEntity<?> deleteWishReadList(@PathVariable Long userId, @PathVariable Long bookId) {
         service.deleteWishReadList(userId, bookId);
         return ResponseEntity.ok().build();
     }
-    @DeleteMapping("/user/{userId}/all")
-    @PreAuthorize("#userId == authentication.principal.userId")
+    @DeleteMapping("/user/{userId}/all") //WORKS
+    @PreAuthorize("@authenticateUserService.hasId(#userId)")
     public ResponseEntity<?> deleteAllWishReadListsByUserId(@PathVariable Long userId) {
         service.deleteAllWishReadListsByUserId(userId);
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("/user/{userId}") //TODO only THE USER HIMSELF can do this
+    @GetMapping("/user/{userId}") //TODO IS DONE IN FE, STH WRONG WITH DB FOR AUTHORS.
+    @PreAuthorize("@authenticateUserService.hasId(#userId)")
     public ResponseEntity<List<WishReadList>> getWishReadListsByUserId(@PathVariable Long userId) {
         List<WishReadList> wishReadLists = service.findWishReadListsByUserId(userId);
-        return ResponseEntity.ok(wishReadLists);
-    }
-
-    @GetMapping("/user/{userId}/status")
-    @PreAuthorize("#userId == authentication.principal.userId")
-    public ResponseEntity<List<WishReadList>> getWishReadListsByUserIdAndWish(
-            @PathVariable Long userId,
-            @RequestParam Wish wish) {
-        List<WishReadList> wishReadLists = service.findWishReadListsByUserIdAndWish(userId, wish);
         return ResponseEntity.ok(wishReadLists);
     }
 }

@@ -1,6 +1,7 @@
 package app.greatreadsfinal.services;
 
 import app.greatreadsfinal.dtos.LoginDTO;
+import app.greatreadsfinal.dtos.LoginResponse;
 import app.greatreadsfinal.dtos.UserDetailsDto;
 import app.greatreadsfinal.dtos.updatesBody.PromoteToAuthor;
 import app.greatreadsfinal.dtos.updatesBody.UpdateUserDto;
@@ -57,14 +58,17 @@ public class UserDService {
     }
 
 
-    public String loginUser(LoginDTO loginDTO) throws AuthenticationFailedException {
+    public LoginResponse loginUser(LoginDTO loginDTO) throws AuthenticationFailedException {
         UserD user = userDetailsRepository.findByUsername(loginDTO.getUsername())
                 .orElseThrow(() -> new DoesNotExistException("User doesn't exist"));
 
         if (!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
             throw new AuthenticationFailedException("Password mismatch");
         }
-        return jwtService.generateTokenForUser(user);
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setToken(jwtService.generateTokenForUser(user));
+        loginResponse.setUserId(user.getUserDetailsId());
+        return loginResponse;
     }
 
 

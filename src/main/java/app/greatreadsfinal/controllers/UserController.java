@@ -1,12 +1,14 @@
 package app.greatreadsfinal.controllers;
 
 import app.greatreadsfinal.dtos.LoginDTO;
+import app.greatreadsfinal.dtos.LoginResponse;
 import app.greatreadsfinal.dtos.UserDetailsDto;
 import app.greatreadsfinal.dtos.updatesBody.PromoteToAuthor;
 import app.greatreadsfinal.dtos.updatesBody.UpdateUserDto;
 import app.greatreadsfinal.exceptions.DoesNotExistException;
 import app.greatreadsfinal.services.UserDService;
 import jakarta.mail.AuthenticationFailedException;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/user")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     @Autowired
     private UserDService userService;
@@ -26,13 +29,13 @@ public class UserController {
         return new ResponseEntity<>("User created", HttpStatus.CREATED);
     }
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody @Valid LoginDTO loginDTO) throws AuthenticationFailedException {
-        String jwt = userService.loginUser(loginDTO);
-        return ResponseEntity.ok(jwt);
+    public ResponseEntity<LoginResponse> loginUser(@RequestBody @Valid LoginDTO loginDTO) throws AuthenticationFailedException {
+        LoginResponse loginResponse = userService.loginUser(loginDTO);
+        return ResponseEntity.ok(loginResponse);
     }
+
     @PostMapping("/logout") //TODO ONLY THE USER HIMSELF CAN LOGOUT.
     public ResponseEntity<String> logoutUser() {
-
         return ResponseEntity.ok("Logout successful");
     }
     @PatchMapping("update/{userId}")

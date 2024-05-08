@@ -35,7 +35,7 @@ public class Books {
     @Column(name="pdf_content", columnDefinition = "LONGBLOB")
     private byte[] pdfContent;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "book_genre",
             joinColumns = @JoinColumn(name = "book_id"),
@@ -44,12 +44,13 @@ public class Books {
     @NotNull
     private Set<Genre> genres;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "book_language",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "language_id")
     )
+    @NotNull
     private Set<Language> languages;
 
     @Column(name = "status")
@@ -63,7 +64,7 @@ public class Books {
     private Long adminId;
 
     @Nullable
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "collection_id")
     private Collection collection;
 

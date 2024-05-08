@@ -25,6 +25,7 @@ public class Author {
     @NotNull
     private String lastName;
     @Nullable
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
     private String country;
     @Nullable

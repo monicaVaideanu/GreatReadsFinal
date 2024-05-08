@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Set;
+
 @Entity
 @Data
 @Table(name = "collections")
@@ -13,7 +15,7 @@ public class Collection {
     private Long collectionId;
     private String name;
 
-    @OneToOne(mappedBy = "collection")
+    @OneToMany(mappedBy = "collection")
     @JsonBackReference
-    private Books book;
+    private Set<Books> book;
 }

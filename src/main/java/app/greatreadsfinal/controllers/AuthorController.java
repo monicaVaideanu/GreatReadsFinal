@@ -20,7 +20,7 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
-    @PostMapping("/add")
+    @PostMapping("/add") // done in fe
     public ResponseEntity<String> createAuthor(@RequestBody AuthorDto authorDTO) {
         authorService.createAuthor(authorDTO);
         return new ResponseEntity<>("Created author.", HttpStatus.CREATED);
@@ -30,19 +30,19 @@ public class AuthorController {
     @PreAuthorize("hasRole('ADMIN') or @authenticateUserService.isAuthorSelf(#id)")
     public ResponseEntity<String> updateAuthor(@PathVariable Long id, @RequestBody UpdateAuthorDto authorDTO) {
         authorService.updateAuthor(id, authorDTO);
-        return ResponseEntity.ok("Updated.");
+        return ResponseEntity.ok("Updated successfully");
     }
     @DeleteMapping("delete/{id}")
     @PreAuthorize("hasRole('ADMIN') or @authenticateUserService.isAuthorSelf(#id)")
     public ResponseEntity<String> deleteAuthor(@PathVariable Long id) {
         authorService.deleteAuthor(id);
-        return ResponseEntity.ok("deletedAuthorDTO");
+        return ResponseEntity.ok("Delete author successfully");
     }
     @GetMapping("/byCountry/{country}")
     public ResponseEntity<List<AuthorDto>> getAuthorByCountry(@PathVariable String country) {
         return ResponseEntity.ok(authorService.getAuthorsByCountry(country));
     }
-    @GetMapping("/all")
+    @GetMapping("/all") //done in fe
     public ResponseEntity<Iterable<AuthorDto>> getAllAuthors() {
         return ResponseEntity.ok(authorService.getAllAuthors());
     }

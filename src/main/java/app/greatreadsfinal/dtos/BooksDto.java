@@ -1,5 +1,6 @@
 package app.greatreadsfinal.dtos;
 
+import app.greatreadsfinal.entities.enums.BookStatus;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -31,9 +32,10 @@ public class BooksDto {
     @Max(value = 5, message = "Average rating cannot be greater than 5.")
     private Double avrRating;
     private byte[] pdfContent;
-
+    private BookStatus status;
     private Set<GenreDto> genres;
     private Set<LanguagesDto> languages;
-    private String collectionName;
+    private Set<CollectionDto> collections;
     private Set<AuthorDto> authors;
+    private Long bookId;
 }

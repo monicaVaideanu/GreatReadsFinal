@@ -17,8 +17,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 @Service
 @Slf4j
@@ -42,17 +46,28 @@ public class BookManagementService {
     private NotificationService notificationService;
     public List<BooksDto> getAllBooks() {
         List<Books> books = bookRepo.findAll();
-        return books.stream().map(bookMapper::mapToDTO).collect(Collectors.toList());
+
+        books.forEach(book -> {
+            System.out.println("Book: " + book.getName() + " has collection: " + (book.getCollection() != null ? book.getCollection().getCollectionName() : "null"));
+        });
+
+        return books
+                .stream()
+                .filter(book -> !book.getStatus().equals(BookStatus.PENDING))
+                .map(bookMapper::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     @Transactional
     public void createBook(BooksDto booksDto){
         Books book = bookMapper.mapToEntity(booksDto);
-        if(booksDto.getCollectionName() != null){
-            Collection collection = findOrCreateCollection(booksDto.getCollectionName());
+        if (booksDto.getCollections() != null && !booksDto.getCollections().isEmpty()) {
+            Collection collection = booksDto.getCollections().stream()
+                    .findFirst()
+                    .map(collectionDto -> findOrCreateCollection(collectionDto.getName()))
+                    .orElse(null);
             book.setCollection(collection);
         }
-
         Set<Genre> genres = findOrCreateGenres(booksDto.getGenres());
         Set<Language> languages = findOrCreateLanguages(booksDto.getLanguages());
         Set<Author> authors = findOrCreateAuthors(booksDto.getAuthors());
@@ -65,30 +80,32 @@ public class BookManagementService {
         bookRepo.save(book);
         notificationService.notifyAdmins(book);
     }
+
     private Collection findOrCreateCollection(String collectionName){
-        return collectionRepo.findByName(collectionName)
-                .orElseGet(()-> {
+        return collectionRepo.findByCollectionName(collectionName)
+                .orElseGet(() -> {
                     Collection newCollection = new Collection();
-                    newCollection.setName(collectionName);
+                    newCollection.setCollectionName(collectionName);
                     return collectionRepo.save(newCollection);
                 });
     }
+
     private Set<Genre> findOrCreateGenres(Set<GenreDto> genreDtos) {
         return genreDtos.stream()
-                .map(genreDto -> genreRepo.findByGenreName(genreDto.getName())
+                .map(genreDto -> genreRepo.findByGenreName(genreDto.getGenreName())
                         .orElseGet(() -> {
                             Genre genre = new Genre();
-                            genre.setGenreName(genreDto.getName());
+                            genre.setGenreName(genreDto.getGenreName());
                             return genreRepo.save(genre);
                         }))
                 .collect(Collectors.toSet());
     }
     private Set<Language> findOrCreateLanguages(Set<LanguagesDto> languageDtos) {
         return languageDtos.stream()
-                .map(languageDto -> languageRepo.findByLanguageName(languageDto.getName())
+                .map(languageDto -> languageRepo.findByLanguageName(languageDto.getLanguageName())
                         .orElseGet(() -> {
                             Language language = new Language();
-                            language.setLanguageName(languageDto.getName());
+                            language.setLanguageName(languageDto.getLanguageName());
                             return languageRepo.save(language);
                         }))
                 .collect(Collectors.toSet());
@@ -133,10 +150,10 @@ public class BookManagementService {
     private void updateGenres(Books book, BooksDto bookDto) {
         if (bookDto.getGenres() != null && !bookDto.getGenres().isEmpty()) {
             Set<Genre> genres = bookDto.getGenres().stream()
-                    .map(genreName -> genreRepo.findByGenreName(genreName.getName())
+                    .map(genreName -> genreRepo.findByGenreName(genreName.getGenreName())
                             .orElseGet(() -> {
                                 Genre newGenre = new Genre();
-                                newGenre.setGenreName(genreName.getName());
+                                newGenre.setGenreName(genreName.getGenreName());
                                 return genreRepo.save(newGenre);
                             }))
                     .collect(Collectors.toSet());
@@ -147,25 +164,28 @@ public class BookManagementService {
     private void updateLanguages(Books book, BooksDto bookDto) {
         if (bookDto.getLanguages() != null && !bookDto.getLanguages().isEmpty()) {
             Set<Language> languages = bookDto.getLanguages().stream()
-                    .map(languageName -> languageRepo.findByLanguageName(languageName.getName())
+                    .map(languageName -> languageRepo.findByLanguageName(languageName.getLanguageName())
                             .orElseGet(() -> {
                                 Language newLanguage = new Language();
-                                newLanguage.setLanguageName(languageName.getName());
+                                newLanguage.setLanguageName(languageName.getLanguageName());
                                 return languageRepo.save(newLanguage);
                             }))
                     .collect(Collectors.toSet());
             book.setLanguages(languages);
         }
     }
-
     private void updateCollection(Books book, BooksDto bookDto) {
-        if (bookDto.getCollectionName() != null && !bookDto.getCollectionName().isEmpty()) {
-            Collection collection = collectionRepo.findByName(bookDto.getCollectionName())
-                    .orElseGet(() -> {
-                        Collection newCollection = new Collection();
-                        newCollection.setName(bookDto.getCollectionName());
-                        return collectionRepo.save(newCollection);
-                    });
+        if (bookDto.getCollections() != null && !bookDto.getCollections().isEmpty()) {
+            Collection collection = bookDto.getCollections().stream()
+                    .findFirst()
+                    .map(collectionDto -> collectionRepo.findByCollectionName(collectionDto.getName())
+                            .orElseGet(() -> {
+                                Collection newCollection = new Collection();
+                                newCollection.setCollectionName(collectionDto.getName());
+                                return collectionRepo.save(newCollection);
+                            }))
+                    .orElse(null);
+
             book.setCollection(collection);
         }
     }
@@ -201,11 +221,11 @@ public class BookManagementService {
 
     public void rejectBook(Long bookId) {
         Books book = bookRepo.findById(bookId).orElseThrow(() -> new DoesNotExistException("Book not found"));
-        book.setStatus(BookStatus.REJECTED);
-        bookRepo.save(book);
+        bookRepo.delete(book);
     }
-    public List<Books> getTop10RatedBooks(){
-        Pageable topTen = PageRequest.of(0,10, Sort.by(Sort.Direction.DESC,"avrRating"));
-        return bookRepo.findTopRatedBooks(topTen);
+    public List<Books> getTop10RatedBooks() {
+        Pageable topTen = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "avrRating"));
+        return bookRepo.findByStatusAndAvrRatingGreaterThanEqual(BookStatus.ACCEPTED, 0, topTen).getContent();
     }
+
 }

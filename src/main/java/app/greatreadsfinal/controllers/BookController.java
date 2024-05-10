@@ -31,7 +31,7 @@ public class BookController {
     private ReviewService reviewService;
     private TextModeratorService textModerationService;
 
-    @PostMapping(value = "/create", consumes = "multipart/form-data")
+    @PostMapping(value = "/create", consumes = "multipart/form-data")//done in fe, problem with collection
     @PreAuthorize("hasRole('ADMIN') or hasRole('AUTHOR')")
     public ResponseEntity<String> createBook(
             @RequestPart("bookDto") BooksDto bookDto,
@@ -48,14 +48,14 @@ public class BookController {
         }
     }
 
-    @PatchMapping("/update/{bookId}")
+    @PatchMapping("/update/{bookId}") //TODO IN FE
     @PreAuthorize("hasRole('ADMIN') or @bookSecurityService.isBookAuthor(#bookId, authentication.name)")
     public ResponseEntity<String> updateBook(@PathVariable Long bookId, @RequestBody BooksDto bookDto) {
         bookManagementService.updateBook(bookId, bookDto);
         return ResponseEntity.ok("Book updated successfully");
     }
 
-    @DeleteMapping("/delete/{bookId}")
+    @DeleteMapping("/delete/{bookId}") //TODO IN FE
     @PreAuthorize("hasRole('ADMIN') or @bookSecurityService.isBookAuthor(#bookId, authentication.name)")
     public ResponseEntity<String> deleteBook(@PathVariable Long bookId) {
         bookService.deleteBook(bookId);
@@ -64,35 +64,51 @@ public class BookController {
 
     @GetMapping("/rating/{bookId}")
     public ResponseEntity<String> getRatings(@PathVariable Long bookId) {
-        Double averageRating = reviewService.getAverageRating(bookId); //todo change message
+        Double averageRating = reviewService.getAverageRating(bookId);
         return ResponseEntity.ok("Ratings retrieved for bookId: " + bookId + "is: " + averageRating);
     }
-
-    @GetMapping("/byAuthor/{authorId}")
-    public ResponseEntity<List<BooksDto>> getBooksByAuthor(@PathVariable Long authorId) {
-        List<BooksDto> books = bookService.getBooksByAuthor(authorId);
-        return ResponseEntity.ok(books);
+    @GetMapping("getGenres") //done in fe
+    public ResponseEntity<List<String>> getGenres() {
+        List<String> genres = bookService.getGenres();
+        return ResponseEntity.ok(genres);
     }
 
-    @GetMapping("/byGenre/{genreId}")
-    public ResponseEntity<List<BooksDto>> getBooksByGenre(@PathVariable Long genreId) {
-        List<BooksDto> books = bookService.getBooksByGenre(genreId);
-        return ResponseEntity.ok(books);
+    @GetMapping("getLanguages") // done in fe
+    public ResponseEntity<List<String>> getLanguages() {
+        List<String> languages = bookService.getLanguages();
+        return ResponseEntity.ok(languages);
+    }
+    @GetMapping("getCollections") // TODO done in fe not working from be
+    public ResponseEntity<List<String>> getCollections() {
+        List<String> collections = bookService.getCollections();
+        return ResponseEntity.ok(collections);
     }
 
-    @GetMapping("/byLanguage/{languageId}")
-    public ResponseEntity<List<BooksDto>> getBooksByLanguage(@PathVariable Long languageId) {
-        List<BooksDto> books = bookService.getBooksByLanguage(languageId);
-        return ResponseEntity.ok(books);
-    }
+//    @GetMapping("/byAuthor/{authorId}")
+//    public ResponseEntity<List<BooksDto>> getBooksByAuthor(@PathVariable Long authorId) {
+//        List<BooksDto> books = bookService.getBooksByAuthor(authorId);
+//        return ResponseEntity.ok(books);
+//    }
+//
+//    @GetMapping("/byGenre/{genreId}")
+//    public ResponseEntity<List<BooksDto>> getBooksByGenre(@PathVariable Long genreId) {
+//        List<BooksDto> books = bookService.getBooksByGenre(genreId);
+//        return ResponseEntity.ok(books);
+//    }
+//
+//    @GetMapping("/byLanguage/{languageId}")
+//    public ResponseEntity<List<BooksDto>> getBooksByLanguage(@PathVariable Long languageId) {
+//        List<BooksDto> books = bookService.getBooksByLanguage(languageId);
+//        return ResponseEntity.ok(books);
+//    }
+//
+//    @GetMapping("/byCollection/{collectionId}")
+//    public ResponseEntity<List<BooksDto>> getBooksByCollection(@PathVariable Long collectionId) {
+//        List<BooksDto> books = bookService.getBooksByCollection(collectionId);
+//        return ResponseEntity.ok(books);
+//    }
 
-    @GetMapping("/byCollection/{collectionId}")
-    public ResponseEntity<List<BooksDto>> getBooksByCollection(@PathVariable Long collectionId) {
-        List<BooksDto> books = bookService.getBooksByCollection(collectionId);
-        return ResponseEntity.ok(books);
-    }
-
-    @GetMapping("all")
+    @GetMapping("all") //done in fe
     public ResponseEntity<List<BooksDto>> getAllBooks() {
         List<BooksDto> books = bookManagementService.getAllBooks();
         return ResponseEntity.ok(books);
@@ -121,7 +137,7 @@ public class BookController {
         return ResponseEntity.ok("Review added to book successfully");
     }
 
-    @GetMapping("top10books")
+    @GetMapping("top10books") // done in fe
     public ResponseEntity<List<Books>> getTopTen() {
         return ResponseEntity.ok(bookManagementService.getTop10RatedBooks());
     }

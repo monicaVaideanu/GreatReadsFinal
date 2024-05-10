@@ -14,5 +14,5 @@ public class LanguagesDto {
     @Size(min = 2, max = 2)
     private String code;
     @NotBlank(message = "Name cannot be blank.")
-    private String name;
+    private String languageName;
 }

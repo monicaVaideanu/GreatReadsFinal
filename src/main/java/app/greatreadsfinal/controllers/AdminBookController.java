@@ -23,7 +23,6 @@ public class AdminBookController {
     @PostMapping("/reject/{bookId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> rejectBook(@PathVariable Long bookId) {
-        System.out.println("entered reject book from controller");
         bookManagementService.rejectBook(bookId);
         return ResponseEntity.ok("Book rejected");
     }

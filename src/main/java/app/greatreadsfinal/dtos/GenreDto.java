@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GenreDto {
     @NotBlank(message = "Name cannot be blank.")
-    private String name;
+    private String genreName;
     @NotBlank(message = "Description cannot be blank.")
     private String description;
 }

@@ -1,17 +1,17 @@
 INSERT INTO user_details(created_at, updated_at, user_id, email, first_name, last_name, middle_name, password, role,
                          username)
-VALUES ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 1, 'AAAAA@gmail.com', 'Popescu',
-        'Georgel', 'Gigi', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'ADMIN', 'userAdmin'),
-       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 2, 'reader1@gmail.com', 'Pearson', 'Betty',
-        'Lili', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader1'),
-       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 3, 'reader2@gmail.com', 'Nichols', 'George',
-        'Gigi', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader2'),
+VALUES ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 1, 'AAAAA@gmail.com', 'Popescu', 'Georgel', 'Gigi',
+        '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'ADMIN', 'userAdmin'),
+       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 2, 'reader1@gmail.com', 'Pearson', 'Betty', 'Lili',
+        '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader1'),
+       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 3, 'reader2@gmail.com', 'Nichols', 'George', 'Gigi',
+        '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader2'),
        ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 4, 'reader3@gmail.com', 'Mackenzie', 'Paul',
         'Steve', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader3'),
        ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 5, 'reader4@gmail.com', 'Fogg', 'Steve', 'Steve',
         '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader4'),
-       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 6, 'reader5@gmail.com', 'Hoffman', 'Joseph',
-        'Gigi', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader5'),
+       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 6, 'reader5@gmail.com', 'Hoffman', 'Joseph', 'Gigi',
+        '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader5'),
        ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 7, 'reader6@gmail.com', 'Creanmer', 'Norman',
         'Didi', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader6'),
        ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 8, 'admin1@gmail.com', 'Mabry', 'Bill', 'Bryan',
@@ -20,23 +20,83 @@ VALUES ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 1, 'AAAAA@gm
         'Didi', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader7'),
        ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 10, 'admin2@gmail.com', 'Duff', 'Bill', 'Cright',
         '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'ADMIN', 'userAdmin3'),
-       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463',11, 'author1@gmail.com', 'Hoffman', 'Joseph',
-        'Gigi', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'AUTHOR', 'authorAuthor')
-;
+       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 11, 'author1@gmail.com', 'Hoffman', 'Joseph',
+        'Gigi', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'AUTHOR', 'authorAuthor');
+
 -- AUTORI CLASICI
 INSERT INTO authors (author_id, first_name, last_name, description, country, middle_name, created_at, updated_at)
-VALUES
-    (1, 'George', 'Orwell', 'Was a novelist, poet, essayist, journalist, and critic. His work is characterised by lucid prose, social criticism, opposition to totalitarianism, and support of democratic socialism.', 'United Kingdom', ' ', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
-    (2, 'Fyodor', 'Dostoevsky', 'Was a novelist, short story writer, essayist and journalist. Numerous literary critics regard him as one of the greatest novelists in all of world literature, as many of his works are considered highly influential masterpieces.', 'Russia', 'Mikhailovich', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
-    (3, 'Jane', 'Austen', 'Was a novelist known primarily for her six novels, which implicitly interpret, critique, and comment upon the British landed gentry at the end of the 18th century. Austen''s plots often explore the dependence of women on marriage for the pursuit of favourable social standing and economic security. Her works are an implicit critique of the novels of sensibility of the second half of the 18th century and are part of the transition to 19th-century literary realism.', 'United Kingdom', 'Elizabeth', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
-    (4, 'Mark', 'Twain', 'Was a writer, humorist and essayist. He was praised as the "greatest humorist the United States has produced," with William Faulkner calling him "the father of American literature." His novels include The Adventures of Tom Sawyer (1876) and its sequel, Adventures of Huckleberry Finn (1884).', 'United States', 'Samuel', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
-    (5, 'William', 'Shakespeare', 'Was a playwright, poet, and actor. He is widely regarded as the greatest writer in the English language and the world''s pre-eminent dramatist. He is often called England''s national poet and the "Bard of Avon" (or simply "the Bard").', 'United Kingdom', 'William',    '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
-    (6, 'J. K.', 'Rowling', 'Is an author and philanthropist. She wrote Harry Potter, a seven-volume fantasy series published from 1997 to 2007. The series has sold over 600 million copies, been translated into 84 languages, and spawned a global media franchise including films and video games. The Casual Vacancy (2012) was her first novel for adults.', 'United Kingdom', 'Rowling', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
-    (7, 'Agatha', 'Christie', 'Was a writer known for her 66 detective novels and 14 short story collections, particularly those revolving around fictional detectives Hercule Poirot and Miss Marple. She also wrote the world''s longest-running play, the murder mystery The Mousetrap, which has been performed in the West End of London since 1952', 'United Kingdom', 'Christie', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463');
-
+VALUES (1, 'George', 'Orwell',
+        'Was a novelist, poet, essayist, journalist, and critic. His work is characterised by lucid prose, social criticism, opposition to totalitarianism, and support of democratic socialism.',
+        'United Kingdom', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (2, 'Fyodor', 'Dostoevsky',
+        'Was a novelist, short story writer, essayist and journalist. Numerous literary critics regard him as one of the greatest novelists in all of world literature, as many of his works are considered highly influential masterpieces.',
+        'Russia', 'Mikhailovich', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (3, 'Jane', 'Austen',
+        'Was a novelist known primarily for her six novels, which implicitly interpret, critique, and comment upon the British landed gentry at the end of the 18th century. Austen''s plots often explore the dependence of women on marriage in the pursuit of favourable social standing and economic security.',
+        'United Kingdom', 'Elizabeth', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (4, 'Mark', 'Twain',
+        'Was a writer, humorist, and essayist. He was praised as the "greatest humorist the United States has produced," with William Faulkner calling him "the father of American literature."',
+        'United States', 'Samuel', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (5, 'William', 'Shakespeare',
+        'Was a playwright, poet, and actor. He is widely regarded as the greatest writer in the English language and the world''s pre-eminent dramatist.',
+        'United Kingdom', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (6, 'J. K.', 'Rowling',
+        'Is an author and philanthropist. She wrote the Harry Potter series, a seven-volume fantasy series published from 1997 to 2007. The series has sold over 600 million copies, been translated into 84 languages, and spawned a global media franchise.',
+        'United Kingdom', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (7, 'Agatha', 'Christie',
+        'Was a writer known for her 66 detective novels and 14 short story collections, particularly those revolving around her fictional detectives Hercule Poirot and Miss Marple.',
+        'United Kingdom', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (8, 'Charles', 'Dickens',
+        'Was an English writer and social critic. He created some of the world''s best-known fictional characters and is regarded by many as the greatest novelist of the Victorian era.',
+        'United Kingdom', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (9, 'Leo', 'Tolstoy',
+        'Was a Russian writer who is regarded as one of the greatest authors of all time. He is best known for "War and Peace" (1869) and "Anna Karenina" (1877).',
+        'Russia', 'Nikolayevich', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (10, 'Ernest', 'Hemingway',
+        'Was an American novelist, short-story writer, and journalist. His economical and understated style had a strong influence on 20th-century fiction.',
+        'United States', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (11, 'Virginia', 'Woolf',
+        'Was an English writer, considered one of the most important modernist 20th-century authors and also a pioneer in the use of stream of consciousness as a narrative device.',
+        'United Kingdom', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (12, 'Gabriel', 'García Márquez',
+        'Was a Colombian novelist, short-story writer, screenwriter, and journalist, known affectionately as Gabo throughout Latin America.',
+        'Colombia', 'José', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (13, 'Haruki', 'Murakami',
+        'Is a contemporary Japanese writer. His books and stories have been bestsellers in Japan as well as internationally, with his work being translated into 50 languages and selling millions of copies outside his native country.',
+        'Japan', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (14, 'Chinua', 'Achebe',
+        'Was a Nigerian novelist, poet, professor, and critic. His first novel "Things Fall Apart" (1958) is the most widely read book in modern African literature.',
+        'Nigeria', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (15, 'Isabel', 'Allende',
+        'Is a Chilean writer. Allende, whose works sometimes contain aspects of the genre of "magical realism", is famous for novels such as "The House of the Spirits" and "City of the Beasts."',
+        'Chile', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (16, 'Franz', 'Kafka',
+        'Was a German-speaking Bohemian novelist and short-story writer, widely regarded as one of the major figures of 20th-century literature. His work fuses elements of realism and the fantastic.',
+        'Czech Republic', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (17, 'Marcel', 'Proust',
+        'Was a French novelist, critic, and essayist best known for his monumental novel "In Search of Lost Time"; it was published in seven parts between 1913 and 1927.',
+        'France', 'Valentin Louis Georges Eugène Marcel', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (18, 'Toni', 'Morrison',
+        'Was an American novelist, essayist, editor, teacher, and professor emeritus at Princeton University. Morrison won the Pulitzer Prize and the American Book Award in 1988 for "Beloved."',
+        'United States', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (19, 'Orhan', 'Pamuk',
+        'Is a Turkish novelist, screenwriter, academic and recipient of the 2006 Nobel Prize in Literature. One of Turkey''s most prominent novelists, his work has sold over thirteen million books in sixty-three languages.',
+        'Turkey', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (20, 'Louise', 'Erdrich',
+        'Is an American author, writer of novels, poetry, and children''s books featuring Native American characters and settings. She is an enrolled member of the Turtle Mountain Band of Chippewa Indians, a band of the Anishinaabe (also known as Ojibwe and Chippewa).',
+        'United States', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (21, 'Alice', 'Munro',
+        'Is a Canadian short story writer who won the Nobel Prize in Literature in 2013. Munro''s work has been described as having revolutionized the architecture of short stories, especially in its tendency to move forward and backward in time.',
+        'Canada', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463'),
+       (22, 'Mo', 'Yan',
+        'Is a Chinese novelist and short story writer. Donald Morrison of the U.S. news magazine Time referred to him as "one of the most famous, oft-banned and widely pirated of all Chinese writers.", and he was awarded the Nobel Prize in Literature in 2012.',
+        'China', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463');
 -- AUTORI USERI
-INSERT INTO authors(author_id, description, country, middle_Name, user_id, created_at, updated_at,first_name, last_name)
-VALUES (8, 'Lack of talent in description, my books speak for me', 'Portugal', 'Siri', 11, '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 'Hoffman', 'Joseph');
+INSERT INTO authors(author_id, description, country, middle_Name, user_id, created_at, updated_at, first_name,
+                    last_name)
+VALUES (23, 'Lack of talent in description, my books speak for me', 'Portugal', 'Siri', 11,
+        '2024-04-14 11:26:40.434463',
+        '2024-04-14 11:26:40.434463', 'Hoffman', 'Joseph');
 
 INSERT INTO collections(collection_id, name)
 VALUES (1, 'Classic Novels'),
@@ -48,7 +108,8 @@ VALUES (1, 'Classic Novels'),
        (7, 'The Hobbit'),
        (8, 'The Worlds Favourite Agatha Christie');
 INSERT
-INTO books(book_id, name, description, available_to_download, year_publication, publisher, avr_rating, status, admin_id, collection_id)
+INTO books(book_id, name, description, available_to_download, year_publication, publisher, avr_rating, status, admin_id,
+           collection_id)
 VALUES (1, 'Pride and Justice',
         'A novel of manners, it follows the character development of Elizabeth Bennet, the protagonist of the book, who learns about the repercussions of hasty judgments and comes to appreciate the difference between superficial goodness and actual goodness.',
         FALSE, 1813, 'T. Egerton, Whitehall', 4.5, 'ACCEPTED', 1, 1),
@@ -57,8 +118,26 @@ VALUES (1, 'Pride and Justice',
         FALSE, 1920, 'John Lane', 4.3, 'ACCEPTED', 1, 8),
        (3, 'And Then There Were None',
         'Is a mystery novel by the English writer Agatha Christie, who described it as the most difficult of her books to write.',
-        FALSE, 1939, 'Collins Crime Club', 3.9, 'ACCEPTED', 1, 8);
-
+        FALSE, 1939, 'Collins Crime Club', 3.9, 'ACCEPTED', 1, 8),
+       (4, '1984', 'A dystopian social science fiction novel and cautionary tale by English writer George Orwell. ',
+        FALSE, 1949, 'Secker & Warburg', 4.7, 'ACCEPTED', 1, 2),
+       (5, 'Animal Farm', 'An allegorical novella by George Orwell, first published in England on 17 August 1945. ',
+        FALSE, 1945, 'Secker and Warburg', 4.6, 'ACCEPTED', 1, 1),
+       (6, 'Crime and Punishment', 'A novel by the Russian author Fyodor Dostoevsky. ', FALSE, 1866,
+        'The Russian Messenger', 4.8, 'ACCEPTED', 1, 1),
+       (7, 'The Brothers Karamazov',
+        'A passionate philosophical novel set in 19th-century Russia, that enters deeply into the ethical debates of God, free will, and morality. ',
+        FALSE, 1880, 'The Russian Messenger', 4.9, 'ACCEPTED', 1, 1),
+       (8, 'Sense and Sensibility',
+        'A novel by Jane Austen, published in 1811. It was published anonymously; By A Lady appears on the cover page where the author''s name might have been. ',
+        FALSE, 1811, 'Thomas Egerton, Military Library', 4.5, 'ACCEPTED', 1, 1),
+       (9, 'Pride and Prejudice', 'An 1813 romantic novel of manners by Jane Austen. ', FALSE, 1813,
+        'T. Egerton, Whitehall', 4.7, 'ACCEPTED', 1, 1),
+       (10, 'Adventures of Huckleberry Finn',
+        'A novel by Mark Twain, published in the United Kingdom in 1884 and in the United States in 1885. ', FALSE,
+        1884, 'Charles L. Webster And Company', 4.6, 'ACCEPTED', 1, 1),
+       (11, 'The Adventures of Tom Sawyer', 'A novel by Mark Twain published in 1876. ', FALSE, 1876,
+        'American Publishing Company', 4.4, 'ACCEPTED', 1, 1);
 INSERT INTO genres(genre_id, genre_name, description)
 VALUES (1, 'Detective',
         'A genre of fiction in which a detective, either professional or amateur, investigates and solves crimes, often murder mysteries.'),
@@ -94,10 +173,19 @@ VALUES (1, 'EN', 'English'),
        (8, 'PT', 'Portuguese'),
        (9, 'TR', 'Turkish');
 
-INSERT INTO book_genre(book_id, genre_id)
-VALUES (1, 6),
-       (2, 1),
-       (3, 1);
+INSERT INTO book_genre (book_id, genre_id)
+VALUES (1, 6),  -- Pride and Justice este o carte de tip Romance
+       (2, 1),  -- The Mysterious Affair at Styles este o carte de tip Detective
+       (3, 1),  -- And Then There Were None este o carte de tip Detective
+       (4, 7),  -- 1984 este o carte de tip Science Fiction
+       (5, 7),  -- Animal Farm este o carte de tip Science Fiction
+       (6, 4),  -- Crime and Punishment este o carte de tip Mystery
+       (7, 4),  -- The Brothers Karamazov este o carte de tip Mystery
+       (8, 6),  -- Sense and Sensibility este o carte de tip Romance
+       (9, 6),  -- Pride and Prejudice este o carte de tip Romance
+       (10, 9), -- Adventures of Huckleberry Finn este o carte de tip Adventure
+       (11, 9); -- The Adventures of Tom Sawyer este o carte de tip Adventure
+
 INSERT INTO book_language(book_id, language_id)
 VALUES (1, 1),
        (2, 1),
@@ -106,27 +194,64 @@ VALUES (1, 1),
        (1, 3),
        (2, 5),
        (3, 5),
-       (3, 6);
+       (3, 6),
+       (4, 1),
+       (5, 1),
+       (6, 1),
+       (7, 1),
+       (8, 1);
 INSERT INTO books_to_authors(author_id, book_id)
 VALUES (3, 1),
        (7, 2),
-       (7, 3);
+       (7, 3),
+       (1, 4),
+       (1, 5),
+       (2, 6),
+       (2, 7),
+       (3, 8),
+       (3, 9),
+       (4, 10),
+       (4, 11);
 
 INSERT INTO reviews(user_id, book_id, rating, review_text, published_date)
-VALUES (1, 1, 5, 'This is a great book',    '2024-04-14 11:26:40.434463'),
-       (1, 2, 3.9, 'This is a good book',  '2024-04-14 11:26:40.434463'),
-       (1, 3, 4.2, 'This is a great book', '2024-04-14 11:26:40.434463'),
-       (2, 1, 4.5, 'This is a great book',  '2024-04-14 11:26:40.434463'),
-       (2, 2, 3.5, 'This is a good book',  '2024-04-14 11:26:40.434463'),
-       (2, 3, 3.9, 'This is a great book',  '2024-04-14 11:26:40.434463'),
-       (3, 1, 3.2, 'This is a great book',  '2024-04-14 11:26:40.434463'),
-       (3, 2, 3.7, 'This is a good book',   '2024-04-14 11:26:40.434463'),
-       (3, 3, 4.1, 'This is a great book',  '2024-04-14 11:26:40.434463'),
-       (4, 1, 4.3, 'This is a great book',  '2024-04-14 11:26:40.434463'),
-       (4, 2, 4.0, 'This is a good book',   '2024-04-14 11:26:40.434463'),
-       (4, 3, 4.5, 'This is a great book',  '2024-04-14 11:26:40.434463'),
-       (5, 1, 3.1, 'This is a great book','2024-04-14 11:26:40.434463'),
-       (5, 2, 3.1, 'This is a good book',   '2024-04-14 11:26:40.434463'),
-       (5, 3, 3.1, 'This is a great book',  '2024-04-14 11:26:40.434463'),
-       (6, 1, 4.1, 'This is a great book',  '2024-04-14 11:26:40.434463'),
-       (6, 2, 3.2, 'This is a good book',   '2024-04-14 11:26:40.434463');
+VALUES (1, 1, 5, 'This is a great book', '2024-04-14 11:26:40.434463'),
+       (1, 2, 3.9, 'This is a good book', '2024-04-14 11:26:40.434463'),
+       (1, 3, 4.2, 'Good for a beginner', '2024-04-14 11:26:40.434463'),
+       (2, 1, 3.5, 'Not so great', '2024-04-14 11:26:40.434463'),
+       (2, 2, 3.7, 'Good for a summer day', '2024-04-14 11:26:40.434463'),
+       (2, 3, 3.9, 'nice', '2024-04-14 11:26:40.434463'),
+       (3, 1, 2.1, 'Boring', '2024-04-14 11:26:40.434463'),
+       (3, 2, 3.7, 'This is a good book', '2024-04-14 11:26:40.434463'),
+       (3, 3, 4.1, 'This is a great book', '2024-04-14 11:26:40.434463'),
+       (4, 1, 4.3, 'This is a great book', '2024-04-14 11:26:40.434463'),
+       (4, 2, 4.0, 'This is a good book', '2024-04-14 11:26:40.434463'),
+       (4, 3, 4.5, 'This is a great book', '2024-04-14 11:26:40.434463'),
+       (5, 1, 3.1, 'Good', '2024-04-14 11:26:40.434463'),
+       (5, 2, 3.1, 'ok', '2024-04-14 11:26:40.434463'),
+       (5, 3, 3.1, 'ok', '2024-04-14 11:26:40.434463'),
+       (6, 1, 4.1, 'good', '2024-04-14 11:26:40.434463'),
+       (6, 2, 2.2, 'meh', '2024-04-14 11:26:40.434463'),
+       (6, 3, 3.5, 'okish', '2024-04-14 11:26:40.434463');
+insert into wish_read_list(add_date, book_id, user_id, wish)
+VALUES(localtime(), 1,1,wish);
+insert into wish_read_list(add_date, book_id, user_id, wish)
+VALUES(localtime(), 2,1,wish),
+(localtime(), 3,1,wish),
+(localtime(), 4,1,wish),
+(localtime(), 5,1,wish),
+(localtime(), 6,1,wish),
+(localtime(), 1,2,wish),
+(localtime(), 2,2,wish),
+(localtime(), 3,2,wish),
+(localtime(), 1,3,wish),
+(localtime(), 2,3,wish),
+(localtime(), 3,3,wish),
+(localtime(), 1,4,wish),
+(localtime(), 2,4,wish),
+(localtime(), 3,4,wish),
+(localtime(), 1,5,wish),
+(localtime(), 2,5,wish),
+(localtime(), 3,5,wish),
+(localtime(), 1,6,wish),
+(localtime(), 2,6,wish),
+(localtime(), 3,6,wish);

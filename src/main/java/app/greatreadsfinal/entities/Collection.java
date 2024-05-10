@@ -12,10 +12,12 @@ import java.util.Set;
 public class Collection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "collection_id")
     private Long collectionId;
-    private String name;
+    @Column(name = "name")
+    private String collectionName;
 
     @OneToMany(mappedBy = "collection")
     @JsonBackReference
-    private Set<Books> book;
+    private Set<Books> books;
 }

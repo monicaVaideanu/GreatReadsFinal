@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface CollectionRepo extends JpaRepository<Collection, Long> {
-    Optional<Collection> findById(Long id);
+    Optional<Collection> findByCollectionId(Long collectionId);
 
-    Optional<Collection> findByName(String name);
+    Optional<Collection> findByCollectionName(String collectionName);
 }

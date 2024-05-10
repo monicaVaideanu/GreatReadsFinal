@@ -1,6 +1,7 @@
 package app.greatreadsfinal.entities;
 
 import app.greatreadsfinal.entities.enums.BookStatus;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -63,11 +64,12 @@ public class Books {
     @Column //TODO ADMIN ID WHEN A BOOK IS APPROVED
     private Long adminId;
 
-    @Nullable
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "collection_id")
+    @JsonManagedReference
     private Collection collection;
 
-    @ManyToMany(mappedBy = "publishedBooks", fetch = FetchType.EAGER, cascade = CascadeType.ALL) //TODO MANY AUTHORS, NEED TO INSERT IN DIFFERENT TABLE
+    @ManyToMany(mappedBy = "publishedBooks", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Author> authors;
+
 }

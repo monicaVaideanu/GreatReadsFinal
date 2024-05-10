@@ -11,8 +11,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-//TODO
-//https://vladmihalcea.com/how-to-inherit-properties-from-a-base-class-entity-using-mappedsuperclass-with-jpa-and-hibernate/
 @Entity
 @Table(name = "user_details", uniqueConstraints = {
         @UniqueConstraint(columnNames = "email"),

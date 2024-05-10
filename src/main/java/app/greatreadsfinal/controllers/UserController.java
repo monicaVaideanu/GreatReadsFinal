@@ -23,21 +23,17 @@ public class UserController {
     @Autowired
     private UserDService userService;
 
-    @PostMapping("/create")
+    @PostMapping("/create") //done in fe
     public ResponseEntity<String> createUser(@RequestBody @Valid UserDetailsDto userDetails) {
         userService.saveUser(userDetails);
         return new ResponseEntity<>("User created", HttpStatus.CREATED);
     }
-    @PostMapping("/login")
+    @PostMapping("/login") //done in fe
     public ResponseEntity<LoginResponse> loginUser(@RequestBody @Valid LoginDTO loginDTO) throws AuthenticationFailedException {
         LoginResponse loginResponse = userService.loginUser(loginDTO);
         return ResponseEntity.ok(loginResponse);
     }
 
-    @PostMapping("/logout") //TODO ONLY THE USER HIMSELF CAN LOGOUT.
-    public ResponseEntity<String> logoutUser() {
-        return ResponseEntity.ok("Logout successful");
-    }
     @PatchMapping("update/{userId}")
     @PreAuthorize("hasRole('ADMIN') or @authenticateUserService.hasId(#userId)")
     public ResponseEntity<String> updateUser(@PathVariable Long userId, @RequestBody @Valid UpdateUserDto userDetails) {
@@ -50,7 +46,7 @@ public class UserController {
         userService.deleteUser(userId);
         return ResponseEntity.ok("User deleted");
     }
-    @PostMapping("/{userId}/promoteToAuthor")
+    @PostMapping("/{userId}/promoteToAuthor") //done in fe
     @PreAuthorize("hasRole('ADMIN') or @authenticateUserService.hasId(#userId)")
     public ResponseEntity<String> promoteToAuthor(@PathVariable Long userId, @RequestBody PromoteToAuthor authorDto) {
         try {

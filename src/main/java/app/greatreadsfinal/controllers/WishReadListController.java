@@ -30,20 +30,20 @@ public class WishReadListController {
         service.saveWishReadList(wishDto);
         return ResponseEntity.ok("Book added to wish list.");
     }
-    @PostMapping("/updateStatus") //WORKS
+    @PostMapping("/updateStatus") //done in fe
     @PreAuthorize("@authenticateUserService.hasId(#userId)")
     public ResponseEntity<String> updateStatus(@Valid @RequestParam Wish wish, @RequestParam Long userId,
                                                @RequestParam Long bookId){
         service.updateStatus(wish,userId,bookId);
         return ResponseEntity.ok("Status updated.");
     }
-    @DeleteMapping("delete/{userId}/{bookId}") //WORKS
+    @DeleteMapping("delete/{userId}/{bookId}") //done in fe
     @PreAuthorize("@authenticateUserService.hasId(#userId)")
     public ResponseEntity<?> deleteWishReadList(@PathVariable Long userId, @PathVariable Long bookId) {
         service.deleteWishReadList(userId, bookId);
         return ResponseEntity.ok().build();
     }
-    @DeleteMapping("/user/{userId}/all") //WORKS
+    @DeleteMapping("/user/{userId}/all") //done in fe
     @PreAuthorize("@authenticateUserService.hasId(#userId)")
     public ResponseEntity<?> deleteAllWishReadListsByUserId(@PathVariable Long userId) {
         service.deleteAllWishReadListsByUserId(userId);

@@ -3,11 +3,14 @@ package app.greatreadsfinal.services;
 import app.greatreadsfinal.dtos.AuthorDto;
 import app.greatreadsfinal.dtos.updatesBody.UpdateAuthorDto;
 import app.greatreadsfinal.entities.Author;
+import app.greatreadsfinal.entities.UserD;
 import app.greatreadsfinal.exceptions.AlreadyExistsException;
 import app.greatreadsfinal.exceptions.DoesNotExistException;
 import app.greatreadsfinal.mappers.AuthorMapper;
 import app.greatreadsfinal.repositories.AuthorRepo;
 import app.greatreadsfinal.repositories.BookRepo;
+import app.greatreadsfinal.repositories.UserDetailsRepo;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -18,27 +21,33 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class AuthorService {
     private final AuthorRepo authorRepository;
     private final AuthorMapper authorMapper;
     private final BookRepo bookRepository;
-
-    @Autowired
-    public AuthorService(AuthorRepo authorRepository, AuthorMapper authorMapper, BookRepo bookRepository) {
-        this.authorRepository = authorRepository;
-        this.authorMapper = authorMapper;
-        this.bookRepository = bookRepository;
-    }
+    private final UserDetailsRepo user;
 
     public void createAuthor(AuthorDto authorDTO) {
         try {
             Author author = authorMapper.mapToEntity(authorDTO);
+            if (author.getUserId() == null) {
+                UserD newUser = new UserD();
+                newUser.setEmail(authorDTO.getEmail());
+                newUser.setUsername(authorDTO.getUsername());
+                newUser.setFirstName(authorDTO.getFirstName());
+                newUser.setLastName(authorDTO.getLastName());
+                user.save(newUser);
+                author.setUserId(newUser);
+            }
+
             Author savedAuthor = authorRepository.save(author);
             authorMapper.mapToDTO(savedAuthor);
         } catch (DataIntegrityViolationException e) {
             throw new AlreadyExistsException("Author already exists");
         }
     }
+
 
     public void updateAuthor(Long id, UpdateAuthorDto authorDetails) {
         Author author = authorRepository.findById(id)

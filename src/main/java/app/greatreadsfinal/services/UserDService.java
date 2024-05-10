@@ -68,6 +68,7 @@ public class UserDService {
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setToken(jwtService.generateTokenForUser(user));
         loginResponse.setUserId(user.getUserDetailsId());
+        loginResponse.setRole(user.getRole().name());
         return loginResponse;
     }
 

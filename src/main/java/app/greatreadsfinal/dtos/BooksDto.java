@@ -35,7 +35,7 @@ public class BooksDto {
     private BookStatus status;
     private Set<GenreDto> genres;
     private Set<LanguagesDto> languages;
-    private Set<CollectionDto> collections;
+    private CollectionDto collection;
     private Set<AuthorDto> authors;
     private Long bookId;
 }

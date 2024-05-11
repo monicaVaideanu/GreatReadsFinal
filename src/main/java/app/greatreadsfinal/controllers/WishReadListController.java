@@ -25,7 +25,7 @@ public class WishReadListController {
         this.service = service;
     }
     @PostMapping("/addBook") //TODO IN FE
-    @PreAuthorize("@authenticateUserService.hasId(#userId)")
+    @PreAuthorize("@authenticateUserService.hasId(#wishDto.userId)")
     public ResponseEntity<String> saveBook(@Valid @RequestBody WishReadListDto wishDto) {
         service.saveWishReadList(wishDto);
         return ResponseEntity.ok("Book added to wish list.");

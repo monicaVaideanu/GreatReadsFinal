@@ -41,7 +41,8 @@ public class BookService {
     }
 
     public BooksDto getBook(Long bookId) {
-        return bookMapper.mapToDTO(bookRepo.findById(bookId)
+        return bookMapper
+                .mapToDTO(bookRepo.findById(bookId)
                 .orElseThrow(() -> new DoesNotExistException("Book not found with id " + bookId)));
     }
 
@@ -73,9 +74,6 @@ public class BookService {
 
     public List<String> getCollections() {
         List<Collection> collections = collectionRepo.findAll();
-        collections.forEach(collection -> {
-            System.out.println("Collection ID: " + collection.getCollectionId() + ", Name: " + collection.getCollectionName());
-        });
         return collections.stream()
                 .map(Collection::getCollectionName)
                 .collect(Collectors.toList());

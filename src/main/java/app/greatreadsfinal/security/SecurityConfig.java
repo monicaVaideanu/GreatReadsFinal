@@ -98,6 +98,7 @@ public class SecurityConfig {
                         .requestMatchers("/book/byLanguage/{languageId}").permitAll()
                         .requestMatchers("/book/byCollection/{collectionId}").permitAll()
                         .requestMatchers("/book/all").permitAll()
+                        .requestMatchers("/book/review/{bookId}").permitAll()
                         .requestMatchers("/book/{bookId}").permitAll()
                         .requestMatchers("/book/top10books").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")

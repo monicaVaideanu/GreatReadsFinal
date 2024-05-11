@@ -58,75 +58,16 @@ public class BookManagementService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
     public void createBook(BooksDto booksDto){
         Books book = bookMapper.mapToEntity(booksDto);
-        if (booksDto.getCollections() != null && !booksDto.getCollections().isEmpty()) {
-            Collection collection = booksDto.getCollections().stream()
-                    .findFirst()
-                    .map(collectionDto -> findOrCreateCollection(collectionDto.getName()))
-                    .orElse(null);
-            book.setCollection(collection);
+        if (booksDto.getPdfContent() != null && booksDto.getPdfContent().length > 0) {
+            book.setPdfContent(booksDto.getPdfContent());
         }
-        Set<Genre> genres = findOrCreateGenres(booksDto.getGenres());
-        Set<Language> languages = findOrCreateLanguages(booksDto.getLanguages());
-        Set<Author> authors = findOrCreateAuthors(booksDto.getAuthors());
-
-        book.setGenres(genres);
-        book.setLanguages(languages);
-        book.setAuthors(authors);
+        //Books book = bookMapper.mapToEntity(booksDto);
         book.setStatus(BookStatus.PENDING);
-
         bookRepo.save(book);
         notificationService.notifyAdmins(book);
     }
-
-    private Collection findOrCreateCollection(String collectionName){
-        return collectionRepo.findByCollectionName(collectionName)
-                .orElseGet(() -> {
-                    Collection newCollection = new Collection();
-                    newCollection.setCollectionName(collectionName);
-                    return collectionRepo.save(newCollection);
-                });
-    }
-
-    private Set<Genre> findOrCreateGenres(Set<GenreDto> genreDtos) {
-        return genreDtos.stream()
-                .map(genreDto -> genreRepo.findByGenreName(genreDto.getGenreName())
-                        .orElseGet(() -> {
-                            Genre genre = new Genre();
-                            genre.setGenreName(genreDto.getGenreName());
-                            return genreRepo.save(genre);
-                        }))
-                .collect(Collectors.toSet());
-    }
-    private Set<Language> findOrCreateLanguages(Set<LanguagesDto> languageDtos) {
-        return languageDtos.stream()
-                .map(languageDto -> languageRepo.findByLanguageName(languageDto.getLanguageName())
-                        .orElseGet(() -> {
-                            Language language = new Language();
-                            language.setLanguageName(languageDto.getLanguageName());
-                            return languageRepo.save(language);
-                        }))
-                .collect(Collectors.toSet());
-    }
-    private Set<Author> findOrCreateAuthors(Set<AuthorDto> authorDtos) {
-        return authorDtos.stream()
-                .map(authorDto -> authorRepo.findAuthorByFirstNameAndLastName(authorDto.getFirstName(), authorDto.getLastName())
-                        .orElseGet(() -> {
-                            Author author = new Author();
-                            author.setFirstName(authorDto.getFirstName());
-                            author.setLastName(authorDto.getLastName());
-                            userDetailsRepo.findByFirstNameAndLastName(authorDto.getFirstName(), authorDto.getLastName())
-                                    .ifPresent(userDetails -> {
-                                        author.setFirstName(userDetails.getFirstName());
-                                        author.setLastName(userDetails.getLastName());
-                                    });
-                            return authorRepo.save(author);
-                        }))
-                .collect(Collectors.toSet());
-    }
-
     public void updateBook(Long bookId, BooksDto bookDto) {
         Books book = bookRepo.findById(bookId)
                 .orElseThrow(() -> new DoesNotExistException("Book not found with id " + bookId));
@@ -134,7 +75,6 @@ public class BookManagementService {
         updateSimpleFields(book, bookDto);
         updateGenres(book, bookDto);
         updateLanguages(book, bookDto);
-        updateCollection(book, bookDto);
         updateAuthors(book, bookDto);
         bookRepo.save(book);
     }
@@ -172,21 +112,6 @@ public class BookManagementService {
                             }))
                     .collect(Collectors.toSet());
             book.setLanguages(languages);
-        }
-    }
-    private void updateCollection(Books book, BooksDto bookDto) {
-        if (bookDto.getCollections() != null && !bookDto.getCollections().isEmpty()) {
-            Collection collection = bookDto.getCollections().stream()
-                    .findFirst()
-                    .map(collectionDto -> collectionRepo.findByCollectionName(collectionDto.getName())
-                            .orElseGet(() -> {
-                                Collection newCollection = new Collection();
-                                newCollection.setCollectionName(collectionDto.getName());
-                                return collectionRepo.save(newCollection);
-                            }))
-                    .orElse(null);
-
-            book.setCollection(collection);
         }
     }
 

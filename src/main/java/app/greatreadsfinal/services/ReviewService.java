@@ -2,11 +2,13 @@ package app.greatreadsfinal.services;
 
 import app.greatreadsfinal.dtos.ReviewDto;
 import app.greatreadsfinal.entities.Books;
+import app.greatreadsfinal.entities.Collection;
 import app.greatreadsfinal.entities.Review;
 import app.greatreadsfinal.entities.UserD;
 import app.greatreadsfinal.entities.composedId.ReviewComposedId;
 import app.greatreadsfinal.exceptions.AlreadyExistsException;
 import app.greatreadsfinal.exceptions.DoesNotExistException;
+import app.greatreadsfinal.mappers.ReviewMapper;
 import app.greatreadsfinal.repositories.BookRepo;
 import app.greatreadsfinal.repositories.ReviewRepo;
 import app.greatreadsfinal.repositories.UserDetailsRepo;
@@ -14,14 +16,19 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class ReviewService {
     private final ReviewRepo reviewRepo;
     private final BookRepo bookRepo;
     private final UserDetailsRepo userDetailsRepo;
+    private final ReviewMapper reviewMapper;
     @Autowired
-    public ReviewService(ReviewRepo reviewRepo, BookRepo bookRepo, UserDetailsRepo userDetailsRepo) {
+    public ReviewService(ReviewRepo reviewRepo, BookRepo bookRepo, UserDetailsRepo userDetailsRepo, ReviewMapper reviewMapper) {
+        this.reviewMapper = reviewMapper;
         this.reviewRepo = reviewRepo;
         this.bookRepo = bookRepo;
         this.userDetailsRepo = userDetailsRepo;
@@ -61,5 +68,10 @@ public class ReviewService {
         } catch (Exception e) {
             throw new RuntimeException("Failed to delete the review due to an error: " + e.getMessage(), e);
         }
+    }
+
+    public List<ReviewDto> getReviews(Long bookId) {
+        List<Review> reviews = reviewRepo.findByReviewIdBookId(bookId);
+        return reviews.stream().map(reviewMapper::mapToDTO).collect(Collectors.toList());
     }
 }

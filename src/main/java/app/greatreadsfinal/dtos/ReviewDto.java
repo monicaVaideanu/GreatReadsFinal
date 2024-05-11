@@ -19,10 +19,12 @@ public class ReviewDto {
     @Max(value = 5)
     private Double rating;
 
-    private LocalDateTime publishDate;
-
+    private LocalDateTime publishedDate;
     @Nullable
     private String reviewText;
+    private Long bookId;
+    private Long userId;
+    private String username;
 }
 
 

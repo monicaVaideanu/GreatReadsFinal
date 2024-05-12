@@ -8,7 +8,9 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "collections")
+@Table(name = "collections", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "name")
+})
 public class Collection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

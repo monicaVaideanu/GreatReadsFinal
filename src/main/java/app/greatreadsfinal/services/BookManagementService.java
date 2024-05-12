@@ -1,9 +1,6 @@
 package app.greatreadsfinal.services;
 
-import app.greatreadsfinal.dtos.AuthorDto;
-import app.greatreadsfinal.dtos.BooksDto;
-import app.greatreadsfinal.dtos.GenreDto;
-import app.greatreadsfinal.dtos.LanguagesDto;
+import app.greatreadsfinal.dtos.*;
 import app.greatreadsfinal.entities.*;
 import app.greatreadsfinal.entities.enums.BookStatus;
 import app.greatreadsfinal.exceptions.AlreadyExistsException;
@@ -162,6 +159,16 @@ public class BookManagementService {
             genreRepo.save(genreMapper.mapToEntity(genreDto));
         } catch (Exception e) {
             throw new AlreadyExistsException("Genre already exists");
+        }
+    }
+
+    public void addCollection(CollectionDto collectionDto) {
+        Collection collection = new Collection();
+        collection.setCollectionName(collectionDto.getName());
+        try{
+            collectionRepo.save(collection);
+        } catch (Exception e) {
+            throw new AlreadyExistsException("Collection already exists");
         }
     }
 }

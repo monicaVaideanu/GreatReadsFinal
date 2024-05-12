@@ -1,5 +1,6 @@
 package app.greatreadsfinal.controllers;
 
+import app.greatreadsfinal.dtos.CollectionDto;
 import app.greatreadsfinal.dtos.GenreDto;
 import app.greatreadsfinal.services.BookManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,12 @@ public class AdminBookController {
     public ResponseEntity<String> addGenre(@RequestBody GenreDto genreDto) {
         bookManagementService.addGenre(genreDto);
         return ResponseEntity.ok("Genre: " + genreDto.getGenreName() + " added.");
+    }
+
+    @PostMapping("/addCollection")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> addGenre(@RequestBody CollectionDto collectionDto) {
+        bookManagementService.addCollection(collectionDto);
+        return ResponseEntity.ok("Collection: " + collectionDto.getName() + " added.");
     }
 }

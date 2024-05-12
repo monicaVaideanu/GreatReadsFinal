@@ -6,8 +6,10 @@ import app.greatreadsfinal.dtos.GenreDto;
 import app.greatreadsfinal.dtos.LanguagesDto;
 import app.greatreadsfinal.entities.*;
 import app.greatreadsfinal.entities.enums.BookStatus;
+import app.greatreadsfinal.exceptions.AlreadyExistsException;
 import app.greatreadsfinal.exceptions.DoesNotExistException;
 import app.greatreadsfinal.mappers.BookMapper;
+import app.greatreadsfinal.mappers.GenreMapper;
 import app.greatreadsfinal.repositories.*;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +46,8 @@ public class BookManagementService {
     private UserDetailsRepo userDetailsRepo;
     @Autowired
     private NotificationService notificationService;
+    @Autowired
+    private GenreMapper genreMapper;
     public List<BooksDto> getAllBooks() {
         List<Books> books = bookRepo.findAll();
 
@@ -153,4 +157,11 @@ public class BookManagementService {
         return bookRepo.findByStatusAndAvrRatingGreaterThanEqual(BookStatus.ACCEPTED, 0, topTen).getContent();
     }
 
+    public void addGenre(GenreDto genreDto) {
+        try{
+            genreRepo.save(genreMapper.mapToEntity(genreDto));
+        } catch (Exception e) {
+            throw new AlreadyExistsException("Genre already exists");
+        }
+    }
 }

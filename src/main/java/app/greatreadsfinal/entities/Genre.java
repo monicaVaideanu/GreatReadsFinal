@@ -2,10 +2,13 @@ package app.greatreadsfinal.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity
 @Data
-@Table(name = "genres")
+@Table(name = "genres", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "genre_name")
+})
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

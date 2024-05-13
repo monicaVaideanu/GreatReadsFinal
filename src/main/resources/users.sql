@@ -1,29 +1,12 @@
 INSERT INTO user_details(created_at, updated_at, user_id, email, first_name, last_name, middle_name, password, role,
                          username)
-VALUES ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 1, 'AAAAA@gmail.com', 'Popescu', 'Georgel', 'Gigi',
+VALUES ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 1, 'monavaideanu@yahoo.com', 'Popescu', 'Georgel', 'Gigi',
         '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'ADMIN', 'userAdmin'),
        ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 2, 'reader1@gmail.com', 'Pearson', 'Betty', 'Lili',
         '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader1'),
        ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 3, 'reader2@gmail.com', 'Nichols', 'George', 'Gigi',
-        '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader2'),
-       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 4, 'reader3@gmail.com', 'Mackenzie', 'Paul',
-        'Steve', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader3'),
-       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 5, 'reader4@gmail.com', 'Fogg', 'Steve', 'Steve',
-        '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader4'),
-       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 6, 'reader5@gmail.com', 'Hoffman', 'Joseph', 'Gigi',
-        '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader5'),
-       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 7, 'reader6@gmail.com', 'Creanmer', 'Norman',
-        'Didi', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader6'),
-       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 8, 'admin1@gmail.com', 'Mabry', 'Bill', 'Bryan',
-        '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'ADMIN', 'userAdmin2'),
-       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 9, 'reader7@gmail.com', 'McClaskey', 'Norma',
-        'Didi', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'READER', 'userReader7'),
-       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 10, 'admin2@gmail.com', 'Duff', 'Bill', 'Cright',
-        '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'ADMIN', 'userAdmin3'),
-       ('2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463', 11, 'author1@gmail.com', 'Hoffman', 'Joseph',
-        'Gigi', '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'AUTHOR', 'authorAuthor');
+        '$2a$10$YOcywZh5rXginmE9RPmoKukLuUvLmcOPCv2Ehq5gZ.km/osRjqpb.', 'AUTHOR', 'userAuthor1');
 
--- AUTORI CLASICI
 INSERT INTO authors (author_id, first_name, last_name, description, country, middle_name, created_at, updated_at)
 VALUES (1, 'George', 'Orwell',
         'Was a novelist, poet, essayist, journalist, and critic. His work is characterised by lucid prose, social criticism, opposition to totalitarianism, and support of democratic socialism.',
@@ -91,13 +74,6 @@ VALUES (1, 'George', 'Orwell',
        (22, 'Mo', 'Yan',
         'Is a Chinese novelist and short story writer. Donald Morrison of the U.S. news magazine Time referred to him as "one of the most famous, oft-banned and widely pirated of all Chinese writers.", and he was awarded the Nobel Prize in Literature in 2012.',
         'China', '', '2024-04-14 11:26:40.434463', '2024-04-14 11:26:40.434463');
--- AUTORI USERI
-INSERT INTO authors(author_id, description, country, middle_Name, user_id, created_at, updated_at, first_name,
-                    last_name)
-VALUES (23, 'Lack of talent in description, my books speak for me', 'Portugal', 'Siri', 11,
-        '2024-04-14 11:26:40.434463',
-        '2024-04-14 11:26:40.434463', 'Hoffman', 'Joseph');
-
 INSERT INTO collections(collection_id, name)
 VALUES (1, 'Classic Novels'),
        (2, 'Best Sellers'),
@@ -174,17 +150,17 @@ VALUES (1, 'EN', 'English'),
        (9, 'TR', 'Turkish');
 
 INSERT INTO book_genre (book_id, genre_id)
-VALUES (1, 6),  -- Pride and Justice este o carte de tip Romance
-       (2, 1),  -- The Mysterious Affair at Styles este o carte de tip Detective
-       (3, 1),  -- And Then There Were None este o carte de tip Detective
-       (4, 7),  -- 1984 este o carte de tip Science Fiction
-       (5, 7),  -- Animal Farm este o carte de tip Science Fiction
-       (6, 4),  -- Crime and Punishment este o carte de tip Mystery
-       (7, 4),  -- The Brothers Karamazov este o carte de tip Mystery
-       (8, 6),  -- Sense and Sensibility este o carte de tip Romance
-       (9, 6),  -- Pride and Prejudice este o carte de tip Romance
-       (10, 9), -- Adventures of Huckleberry Finn este o carte de tip Adventure
-       (11, 9); -- The Adventures of Tom Sawyer este o carte de tip Adventure
+VALUES (1, 6),
+       (2, 1),
+       (3, 1),
+       (4, 7),
+       (5, 7),
+       (6, 4),
+       (7, 4),
+       (8, 6),
+       (9, 6),
+       (10, 9),
+       (11, 9);
 
 INSERT INTO book_language(book_id, language_id)
 VALUES (1, 1),
@@ -223,19 +199,13 @@ VALUES (1, 1, 5, 'This is a great book', '2024-04-14 11:26:40.434463'),
        (3, 1, 2.1, 'Boring', '2024-04-14 11:26:40.434463'),
        (3, 2, 3.7, 'This is a good book', '2024-04-14 11:26:40.434463'),
        (3, 3, 4.1, 'This is a great book', '2024-04-14 11:26:40.434463'),
-       (4, 1, 4.3, 'This is a great book', '2024-04-14 11:26:40.434463'),
-       (4, 2, 4.0, 'This is a good book', '2024-04-14 11:26:40.434463'),
-       (4, 3, 4.5, 'This is a great book', '2024-04-14 11:26:40.434463'),
-       (5, 1, 3.1, 'Good', '2024-04-14 11:26:40.434463'),
-       (5, 2, 3.1, 'ok', '2024-04-14 11:26:40.434463'),
-       (5, 3, 3.1, 'ok', '2024-04-14 11:26:40.434463'),
-       (6, 1, 4.1, 'good', '2024-04-14 11:26:40.434463'),
-       (6, 2, 2.2, 'meh', '2024-04-14 11:26:40.434463'),
-       (6, 3, 3.5, 'okish', '2024-04-14 11:26:40.434463');
+       (1, 4, 3.9, 'This is a good book', '2024-04-14 11:26:40.434463'),
+       (1, 5, 4.2, 'Good for a beginner', '2024-04-14 11:26:40.434463'),
+       (2, 6, 3.5, 'Not so great', '2024-04-14 11:26:40.434463');
+
 insert into wish_read_list(add_date, book_id, user_id, wish)
 VALUES(localtime(), 1,1,wish);
-insert into wish_read_list(add_date, book_id, user_id, wish)
-VALUES(localtime(), 2,1,wish),
+(localtime(), 2,1,wish),
 (localtime(), 3,1,wish),
 (localtime(), 4,1,wish),
 (localtime(), 5,1,wish),
@@ -245,13 +215,4 @@ VALUES(localtime(), 2,1,wish),
 (localtime(), 3,2,wish),
 (localtime(), 1,3,wish),
 (localtime(), 2,3,wish),
-(localtime(), 3,3,wish),
-(localtime(), 1,4,wish),
-(localtime(), 2,4,wish),
-(localtime(), 3,4,wish),
-(localtime(), 1,5,wish),
-(localtime(), 2,5,wish),
-(localtime(), 3,5,wish),
-(localtime(), 1,6,wish),
-(localtime(), 2,6,wish),
-(localtime(), 3,6,wish);
+(localtime(), 3,3,wish);

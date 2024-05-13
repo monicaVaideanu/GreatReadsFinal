@@ -49,6 +49,15 @@ public class ReviewService {
         review.setRating(reviewDto.getRating());
         review.setReviewText(reviewDto.getReviewText());
         reviewRepo.save(review);
+
+        updateAverageRating(book);
+       // return userD.getUsername();
+    }
+    private void updateAverageRating(Books book) {
+        List<Review> reviews = reviewRepo.findByReviewIdBookId(book.getBookId());
+        double average = reviews.stream().mapToDouble(Review::getRating).average().orElse(0.0);
+        book.setAvrRating(average);
+        bookRepo.save(book);
     }
     public Double getAverageRating(Long bookId) {
         return reviewRepo.findByReviewIdBookId(bookId).stream()

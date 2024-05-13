@@ -58,13 +58,14 @@ public class BookManagementService {
                 .map(bookMapper::mapToDTO)
                 .collect(Collectors.toList());
     }
-
+    @Transactional
     public void createBook(BooksDto booksDto){
-        Books book = bookMapper.mapToEntity(booksDto);
+        Books book = new Books();
         if (booksDto.getPdfContent() != null && booksDto.getPdfContent().length > 0) {
+            System.out.println("BOOK PDF LENGTH: " + booksDto.getPdfContent().length);
             book.setPdfContent(booksDto.getPdfContent());
         }
-        //Books book = bookMapper.mapToEntity(booksDto);
+        book = bookMapper.mapToEntity(booksDto);
         book.setStatus(BookStatus.PENDING);
         bookRepo.save(book);
         notificationService.notifyAdmins(book);
@@ -170,5 +171,19 @@ public class BookManagementService {
         } catch (Exception e) {
             throw new AlreadyExistsException("Collection already exists");
         }
+    }
+
+    public List<BooksDto> getAllPendingBooks() {
+        List<Books> books = bookRepo.findAll();
+
+        books.forEach(book -> {
+            System.out.println("Book: " + book.getName() + " has collection: " + (book.getCollection() != null ? book.getCollection().getCollectionName() : "null"));
+        });
+
+        return books
+                .stream()
+                .filter(book -> book.getStatus().equals(BookStatus.PENDING))
+                .map(bookMapper::mapToDTO)
+                .collect(Collectors.toList());
     }
 }

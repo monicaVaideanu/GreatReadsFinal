@@ -38,9 +38,8 @@ public class BookController {
             @RequestPart("bookDto") BooksDto bookDto,
             @RequestPart(required = false) MultipartFile file
     ) {
-        System.out.println(file.getName());
         try {
-            if (file != null && !file.isEmpty()) {
+            if (file != null &&!file.isEmpty()) {
                 bookDto.setPdfContent(file.getBytes());
             }
             bookManagementService.createBook(bookDto);
@@ -96,6 +95,11 @@ public class BookController {
         List<BooksDto> books = bookManagementService.getAllBooks();
         return ResponseEntity.ok(books);
     }
+    @GetMapping("getAllPending")
+    public ResponseEntity<List<BooksDto>> getAllPendingBooks() {
+        List<BooksDto> books = bookManagementService.getAllPendingBooks();
+        return ResponseEntity.ok(books);
+    }
 
     @GetMapping("/{bookId}")
     public ResponseEntity<BooksDto> getBook(@PathVariable Long bookId) {
@@ -116,11 +120,11 @@ public class BookController {
             return ResponseEntity.badRequest().body("Review text contains inappropriate content");
         }
 
-        reviewService.addReviewToBook(bookId, userId, reviewDto);
+        reviewService.addReviewToBook(userId, bookId, reviewDto);
         return ResponseEntity.ok("Review added to book successfully");
     }
 
-    @GetMapping("top10books") // done in fe
+    @GetMapping("top10books")
     public ResponseEntity<List<Books>> getTopTen() {
         return ResponseEntity.ok(bookManagementService.getTop10RatedBooks());
     }

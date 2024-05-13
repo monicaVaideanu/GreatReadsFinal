@@ -1,12 +1,14 @@
 package app.greatreadsfinal.services;
 
 import app.greatreadsfinal.dtos.AuthorDto;
+import app.greatreadsfinal.dtos.BooksDto;
 import app.greatreadsfinal.dtos.updatesBody.UpdateAuthorDto;
 import app.greatreadsfinal.entities.Author;
 import app.greatreadsfinal.entities.UserD;
 import app.greatreadsfinal.exceptions.AlreadyExistsException;
 import app.greatreadsfinal.exceptions.DoesNotExistException;
 import app.greatreadsfinal.mappers.AuthorMapper;
+import app.greatreadsfinal.mappers.BookMapper;
 import app.greatreadsfinal.repositories.AuthorRepo;
 import app.greatreadsfinal.repositories.BookRepo;
 import app.greatreadsfinal.repositories.UserDetailsRepo;
@@ -27,6 +29,7 @@ public class AuthorService {
     private final AuthorMapper authorMapper;
     private final BookRepo bookRepository;
     private final UserDetailsRepo user;
+    private final BookMapper bookMapper;
 
     public void createAuthor(AuthorDto authorDTO) {
         try {
@@ -128,5 +131,13 @@ public class AuthorService {
         Author author = authorMapper.mapToEntity(authorDto);
         author.setUserId(null);
         authorRepository.save(author);
+    }
+
+    public Set<BooksDto> getPublishedBooksByAuthorId(Long authorId) {
+        Author author = authorRepository.findById(authorId)
+                .orElseThrow(() -> new DoesNotExistException("Author not found with id " + authorId));
+        return author.getPublishedBooks().stream()
+                .map(bookMapper::mapToDTO)
+                .collect(Collectors.toSet());
     }
 }

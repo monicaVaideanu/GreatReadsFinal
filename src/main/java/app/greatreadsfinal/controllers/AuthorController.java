@@ -1,7 +1,9 @@
 package app.greatreadsfinal.controllers;
 
 import app.greatreadsfinal.dtos.AuthorDto;
+import app.greatreadsfinal.dtos.BooksDto;
 import app.greatreadsfinal.dtos.updatesBody.UpdateAuthorDto;
+import app.greatreadsfinal.entities.Books;
 import app.greatreadsfinal.services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,5 +73,14 @@ public class AuthorController {
     public ResponseEntity<String> createClassicAuthor(@RequestBody AuthorDto authorDto){
         authorService.createClassicAuthor(authorDto);
         return ResponseEntity.ok("Added a classic author");
+    }
+    @GetMapping("/{authorId}/published-books")
+    public ResponseEntity<Set<BooksDto>> getAuthorPublishedBooks(@PathVariable Long authorId) {
+        try {
+            Set<BooksDto> publishedBooks = authorService.getPublishedBooksByAuthorId(authorId);
+            return ResponseEntity.ok(publishedBooks);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
